@@ -1,0 +1,80 @@
+**简要描述：**
+
+- 客户端接入网关交易-订单查询详情
+
+**接入商户数据：**
+
+**请求地址：**
+- 生产:https://api.nats.nz/placeOrder/orderGateway/queryOrder
+
+**请求方式：**
+- POST
+
+**参数：**
+
+|参数名|必选|类型|说明|默认值|取值范围|
+|--------|:----|:--------|:---------|:------|:------|
+|merchantNo |是  |string |商户名   | | |
+|partnerOrderNo |是  |string | 接入方订单号 | | |
+|createTime |是  |string | 请求时间 | |yyyyMMddHHmmss |
+|sign |是  |string | 签名串 | | ||
+
+ **请求示例**
+```
+{"data": {
+		"head": {
+					"merchantNo":"client",
+					"sign":"29C9C89EE2AD0BF4078730F1BE7E1F38"
+				},
+		"body": {
+					"partnerOrderNo":"a123",
+					"createTime":"20180711110706"
+		 		}
+		}
+}
+
+```
+
+ **返回参数说明** 
+
+|参数名|是否必须|类型|说明|取值范围|
+|--------|:----|:--------|:---------|:------|:------|
+|code  |true| string  | 1-成功 2-失败| 1,2|
+|msg |true   |string |返回消息| |
+|merchantNo |true   |string |商户号| |
+|partnerOrderNo |true   |string |订单号| |
+|symbol |true   |string |交易对| |
+|amount |true   |string |订单数量| |
+|price |true   |string |订单价格| |
+|total |true   |string |订单总额| |
+|createTime |true   |long |订单生成时间戳| |
+|type |true   |string |订单类型|buyMarket：市价买, sellMarket：市价卖, buyLimit：限价买, sellLimit：限价卖|
+|fieldAmount |true   |string |已成交数量| |
+|fieldCashAmount |true   |string |已成交总金额| |
+|fieldFees |true   |string |已成交手续费（扣除得币的手续费）| |
+|finishedTime |false   |long |订单最后一次更新时间戳| |
+|status |true   |string |订单状态| 1:已完成 2:取消 ，3:进行中,4 已完成，但未发生交易（因流通性不足）|
+
+
+ **返回示例**
+```
+{
+	"code": "1",
+	"msg":"ok",
+	"data":{
+		"merchantNo":"client",
+		"partnerOrderNo":"a123",
+		"symbol": "ETH/USDT",
+		"amount": "10.10000000",
+		"price": "100.10000000",
+		"total": "1000.10000000",
+		"createTime": 1538201793000,
+		"type": "buyLimit",
+		"fieldAmount": "10.1000000000",
+		"fieldCashAmount": "1011.0100000000",
+		"fieldFees": "0.0202000000",
+		"finishedTime": 1538201793000,
+		"status": "1"
+	}
+}
+```
