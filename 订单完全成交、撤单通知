@@ -32,6 +32,7 @@
 |createTime |true  |long | 通知时间戳 | | |
 |sign |true  |string | 签名串 | | ||
 
+
  **请求示例**
 ```
 {
