@@ -6,8 +6,7 @@
 
 
 **请求地址：**
-- 测试:http://g.daliuliang.com.cn/placeOrder/orderGateway/placeOrder
-- 生产:http://g.daliuliang.com.cn/placeOrder/orderGateway/placeOrder
+- 生产:https://api.nats.nz/placeOrder/orderGateway/placeOrder
 
 **请求方式：**
 - POST
