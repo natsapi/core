@@ -1,0 +1,68 @@
+**简要描述：**
+
+- 客户端接入网关交易-撤销订单
+
+**接入商户数据：**
+
+
+**请求地址：**
+- 生产:https://api.nats.nz/placeOrder/orderGateway/cancelOrder
+
+**请求方式：**
+- POST
+
+**参数：**
+
+|参数名|必选|类型|说明|默认值|取值范围|
+|--------|:----|:--------|:---------|:------|:------|
+|merchantNo |是  |string |商户名   | | |
+|partnerOrderNo |是  |String | 接入方订单号(单次不超过50个订单id) |"[a1,a2,a3]"字符串形式数组|
+|createTime |是  |string | 请求时间 | |yyyyMMddHHmmss(14位)|
+|sign |是  |string | 签名串 | | ||
+
+ **请求示例**
+```
+{"data": {
+		"head": {
+					"merchantNo":"client",
+					"sign":"29C9C89EE2AD0BF4078730F1BE7E1F38"
+				},
+		"body": {
+					"partnerOrderNo":"["a1","a2","a3"]",
+					"createTime":"20180711110706"
+		 		}
+		}
+}
+
+
+```
+
+ **返回参数说明** 
+
+|参数名|是否必须|类型|说明|取值范围|
+|--------|:----|:--------|:---------|:------|
+|code  |true| string  | 1-成功 | 1|
+|msg |true   |string |返回消息| |
+|data |true   |string |返回参数| ||
+
+
+
+ **返回示例**
+```
+{
+	"code": "1",
+	"msg":"ok",
+	"data": {
+		"success": [
+			"a1",
+			"a3"
+		],
+		"failed": [
+			{
+				"msg": "记录无效",
+				"partnerOrderNo": "a2",
+			}
+		]
+	}
+}
+```
